@@ -18,7 +18,9 @@ class AccountViewController: UIViewController {
         view.addSubview(accountLabel)
         accountLabel.numberOfLines = 10
         model.getAccountMemberData { [weak self] data in
-            self?.accountLabel.text = "\(data)"
+            await MainActor.run {
+                self?.accountLabel.text = "\(data)"
+            }
         }
     }
     

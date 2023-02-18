@@ -9,12 +9,11 @@ import Foundation
 
 class AccountModel {
 
-    func getAccountMemberData(completion: @escaping ((MemberData) -> Void)) {
+    func getAccountMemberData(completion: @escaping ((MemberData) async -> Void)) {
         Task {
             let data = await MemberDataManager.shared.getData()
-            await MainActor.run{
-                completion(data)
-            }
+            await completion(data)
         }
     }
+    
 }
